@@ -1,0 +1,107 @@
+#!/bin/bash
+
+source /opt/aninix/Uniglot/Bash/header
+
+unset canaryText
+# cscanary=https://cryptostorm.is/canary.txt
+# cskeyserver=pgp.mit.edu
+# cskey=E9C7C942
+keyserver=pool.sks-keyservers.net
+key=1CC1E3F4ED06F296
+canary=https://foundation.aninix.net/AniNIX/WarrantCanary/raw/branch/master/canary.asc
+alJazeera='https://www.aljazeera.com/xml/rss/all.xml'
+npr='https://www.npr.org/rss/rss.php?id=1004'
+
+function Usage() { 
+    # Show helptext
+    # param retcode: what to exit
+    retcode=$1
+    echo "Usage: $0 -V                               # Verify the AniNIX's warrant canary"
+    echo "       $0 -V -k KEY -K KEYSERVER -c CANARY # Verify another warrant canary"
+    echo "       $0 -s                               # Seed a warrant canary."
+    echo "Add -v to increase verbosity."
+    exit $retcode
+}
+
+function ConfirmGPGKeys() { 
+    # Try to make sure we either have or can pull the key
+    if ! gpg2 --fingerprint "$key"; then
+        gpg --keyserver "$keyserver" --recv-key "$key"
+        if ! [ $? -eq 0 ] || gpg2 --fingerprint "$key"; then
+            echo Cannot pull the key: "$key".
+            exit 1;
+        fi
+    fi
+}
+
+function RecentNews() {
+    # Pull the first recent news article from an RSS feed.
+    # param rssFeed: the url to pull
+    rssFeed="$1"
+    curl -s "$rssFeed" | tr '<' '\n' | egrep -m 5 link | tail -n 1 | cut -f 2 -d '>' | cut -f 1 -d '?'
+}
+  
+function CanarySeed() { 
+    header Creating and signing a canary message
+    time=`date +%s`
+    cat > ./canary << EOM
+
+As of $(date +%F), aninix.net has not received any National Security Letters or FISA court orders, and we have not been subject to any gag order(s) by a FISA court, or any other similar court(s) of any government. AniNIX has never placed any backdoors in our hardware or software and has not received any requests to do so. AniNIX has never disclosed any user communications to any third party. No searches or seizures of any kind have ever been performed on AniNIX assets.
+
+The next two updates should be on or before:
+* `date -d @$(( $time + 7776000 )) +%F`
+* `date -d @$(( $time + 15552000 )) +%F`
+
+Recent news:
+* $(RecentNews "$alJazeera")
+* $(RecentNews "$npr")
+
+To verify this message, on the terminal import our public key from $keyserver and verify the canary:
+$ gpg --keyserver $keyserver --recv-key $key
+$ gpg2 --fingerprint $key
+$(gpg2 --fingerprint $key)
+$ gpg --verify <(curl -s $canary) 2>&1 | grep 'Good signature'
+gpg: Good signature from "Shikoba Kage <darkfeather@aninix.net>"
+
+There will most likely be other lines in the output from that last command, but as long as it says "Good signature", the verification worked correctly.
+EOM
+   gpg --default-key "$key" --personal-digest-preferences sha512 --clear-sign ./canary
+   retcode=$?
+   if [ $retcode -eq 0 ]; then header Success; else errorheader Fail; fi
+   exit $retcode
+}
+
+function CanaryVerify() {
+    # Verify a canary
+    header Fingerprinting:
+    ConfirmGPGKeys
+    echo
+    header Verification:
+    if [ -f "$canary" ]; then
+        canaryText="$(cat "$canary")"
+    else 
+        canaryText="$(curl -s "$canary")"
+    fi 
+    gpg --verify <(echo "$canaryText") 2>&1 | grep -v 'WARNING: not a detached signature'
+    retcode=$?
+    echo
+    header Human-readable text:
+    echo "$canaryText" | grep -B 99 'To verify this' | grep -v 'To verify this'
+    exit $retcode
+}
+
+# Parse arguments
+while getopts 'c:hk:K:svV' OPTION; do
+    case "$OPTION" in
+        c) canary="$OPTARG" ;;
+        h) echo Use this script to seed or verify a warrant canary; Usage 0 ;;
+        k) key="$OPTARG" ;;
+        K) keyserver="$OPTARG" ;;
+        s) CanarySeed ;;
+        v) set -x ;;
+        V) CanaryVerify ;;
+        *) Usage 1 ;;
+    esac
+done
+
+CanaryVerify
