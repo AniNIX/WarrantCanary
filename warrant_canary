@@ -1,7 +1,5 @@
 #!/bin/bash
 
-source /opt/aninix/Uniglot/Bash/header
-
 unset canaryText
 # cscanary=https://cryptostorm.is/canary.txt
 # cskeyserver=pgp.mit.edu
@@ -23,11 +21,24 @@ function Usage() {
     exit $retcode
 }
 
+## Visual Functions ##
+# These function creates a visual indicator that a step has happened.
+# Borrowed from https://foundation.aninix.net/AniNIX/Uniglot for portability.
+function header () {
+    tput setaf 1; tput bold; echo $@; tput sgr0; return
+}
+function errorheader () {
+    tput setaf 1 1>&2; tput bold 1>&2; echo "ERROR:" $@ 1>&2; tput sgr0 1>&2; return
+}
+function infoheader() {
+    tput setaf 3; tput bold; echo $@; tput sgr0; return
+}
+
 function ConfirmGPGKeys() { 
     # Try to make sure we either have or can pull the key
     if ! gpg2 --fingerprint "$key"; then
         gpg --keyserver "$keyserver" --recv-key "$key"
-        if ! [ $? -eq 0 ] || gpg2 --fingerprint "$key"; then
+        if ! gpg2 --fingerprint "$key"; then
             echo Cannot pull the key: "$key".
             exit 1;
         fi
