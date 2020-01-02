@@ -1,20 +1,20 @@
 
-As of 2019-12-06, aninix.net has not received any National Security Letters or FISA court orders, and we have not been subject to any gag order(s) by a FISA court, or any other similar court(s) of any government. AniNIX has never placed any backdoors in our hardware or software and has not received any requests to do so. AniNIX has never disclosed any user communications to any third party. No searches or seizures of any kind have ever been performed on AniNIX assets.
+As of 2020-01-02, aninix.net has not received any National Security Letters or FISA court orders, and we have not been subject to any gag order(s) by a FISA court, or any other similar court(s) of any government. AniNIX has never placed any backdoors in our hardware or software and has not received any requests to do so. AniNIX has never disclosed any user communications to any third party. No searches or seizures of any kind have ever been performed on AniNIX assets.
 
 The next two updates should be on or before:
-* 2020-03-05
-* 2020-06-03
+* 2020-04-01
+* 2020-06-30
 
 Recent news:
-* https://www.aljazeera.com/blogs/americas/2019/12/chile-protesters-rich-powerful-threw-stone-191206211320350.html
-* https://www.npr.org/2019/12/06/785671274/remembering-tetsu-nakamura-japanese-doctor-who-spent-decades-working-in-afghanis
+* https://www.aljazeera.com/news/2020/01/brexit-uncertainty-relationship-eu-continues-200102063118874.html
+* https://www.npr.org/2020/01/01/792916545/in-rome-local-retirees-are-working-to-clean-up-the-citys-aqueducts
 
 To verify this message, on the terminal import our public key from pool.sks-keyservers.net and verify the canary:
 $ gpg --keyserver pool.sks-keyservers.net --recv-key 1CC1E3F4ED06F296
 $ gpg2 --fingerprint 1CC1E3F4ED06F296
-pub   ed25519 2019-05-19 [SC] [expires: 2021-05-18]
+pub   ed25519 2019-05-19 [SC]
       904D E627 5579 CB58 9D85  720C 1CC1 E3F4 ED06 F296
-uid           [ultimate] Shikoba Kage <DarkFeather@AniNIX.net>
+uid           [ultimate] DarkFeather <ircs://aninix.net:6697/DarkFeather>
 sub   cv25519 2019-05-19 [E] [expires: 2021-05-18]
 $ gpg --verify <(curl -s https://foundation.aninix.net/AniNIX/WarrantCanary/raw/branch/master/canary.asc) 2>&1 | grep 'Good signature'
 gpg: Good signature from "Shikoba Kage <darkfeather@aninix.net>"
