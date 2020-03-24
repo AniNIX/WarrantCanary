@@ -8,7 +8,7 @@ keyserver=pool.sks-keyservers.net
 key=1CC1E3F4ED06F296
 canary=https://foundation.aninix.net/AniNIX/WarrantCanary/raw/branch/master/canary.asc
 alJazeera='https://www.aljazeera.com/xml/rss/all.xml'
-npr='https://www.npr.org/rss/rss.php?id=1004'
+npr='https://feeds.npr.org/1004/rss.xml'
 
 function Usage() { 
     # Show helptext
