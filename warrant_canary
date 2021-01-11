@@ -1,14 +1,19 @@
 #!/bin/bash
 
+source /opt/aninix/Uniglot/Bash/header
+
 unset canaryText
 # cscanary=https://cryptostorm.is/canary.txt
 # cskeyserver=pgp.mit.edu
 # cskey=E9C7C942
 keyserver=pool.sks-keyservers.net
 key=1CC1E3F4ED06F296
-canary=https://foundation.aninix.net/AniNIX/WarrantCanary/raw/branch/master/canary.asc
+canary=https://foundation.aninix.net/AniNIX/WarrantCanary/raw/branch/main/canary.asc
+unset gitCommit
 alJazeera='https://www.aljazeera.com/xml/rss/all.xml'
+alJazeeraDate="$(date +%Y/%m/%d | sed -s 's#/0#/#g')"
 npr='https://feeds.npr.org/1004/rss.xml'
+nprdate="$(date +%Y/%m/%d)"
 
 function Usage() { 
     # Show helptext
@@ -21,18 +26,6 @@ function Usage() {
     exit $retcode
 }
 
-## Visual Functions ##
-# These function creates a visual indicator that a step has happened.
-# Borrowed from https://foundation.aninix.net/AniNIX/Uniglot for portability.
-function header () {
-    tput setaf 1; tput bold; echo $@; tput sgr0; return
-}
-function errorheader () {
-    tput setaf 1 1>&2; tput bold 1>&2; echo "ERROR:" $@ 1>&2; tput sgr0 1>&2; return
-}
-function infoheader() {
-    tput setaf 3; tput bold; echo $@; tput sgr0; return
-}
 
 function ConfirmGPGKeys() { 
     # Try to make sure we either have or can pull the key
@@ -49,14 +42,13 @@ function RecentNews() {
     # Pull the first recent news article from an RSS feed.
     # param rssFeed: the url to pull
     rssFeed="$1"
-    curl -s "$rssFeed" | tr '<' '\n' | egrep -m 5 link | tail -n 1 | cut -f 2 -d '>' | cut -f 1 -d '?'
+    date="$2"
+    curl -s "$rssFeed" | grep "$date" | egrep -m 5 link | tail -n 1 | cut -f 2 -d '>' | cut -f 1 -d '?'
 }
-  
-function CanarySeed() { 
-    header Creating and signing a canary message
-    time=`date +%s`
-    cat > ./canary << EOM
 
+function CreateCanary() {
+    rm ./canary.asc
+    cat > ./canary << EOM
 As of $(date +%F), aninix.net has not received any National Security Letters or FISA court orders, and we have not been subject to any gag order(s) by a FISA court, or any other similar court(s) of any government. AniNIX has never placed any backdoors in our hardware or software and has not received any requests to do so. AniNIX has never disclosed any user communications to any third party. No searches or seizures of any kind have ever been performed on AniNIX assets.
 
 The next two updates should be on or before:
@@ -64,22 +56,43 @@ The next two updates should be on or before:
 * `date -d @$(( $time + 15552000 )) +%F`
 
 Recent news:
-* $(RecentNews "$alJazeera")
-* $(RecentNews "$npr")
+* $(RecentNews "$alJazeera" "$alJazeeraDate")
+* $(RecentNews "$npr" "$nprdate")
 
 To verify this message, on the terminal import our public key from $keyserver and verify the canary:
 $ gpg --keyserver $keyserver --recv-key $key
 $ gpg2 --fingerprint $key
 $(gpg2 --fingerprint $key)
 $ gpg --verify <(curl -s $canary) 2>&1 | grep 'Good signature'
-gpg: Good signature from "Shikoba Kage <darkfeather@aninix.net>"
+gpg: Good signature from "DarkFeather <ircs://aninix.net:6697/DarkFeather>" [ultimate]
 
 There will most likely be other lines in the output from that last command, but as long as it says "Good signature", the verification worked correctly.
 EOM
-   gpg --default-key "$key" --personal-digest-preferences sha512 --clear-sign ./canary
-   retcode=$?
-   if [ $retcode -eq 0 ]; then header Success; else errorheader Fail; fi
-   exit $retcode
+}
+  
+function CanarySeed() { 
+    header Creating and signing a canary message
+    time=`date +%s`
+
+    # Create the canary.
+    CreateCanary
+
+    # Try signing
+    gpg --default-key "$key" --personal-digest-preferences sha512 --clear-sign ./canary
+    retcode=$?
+    if [ $retcode -eq 0 ]; then header Success; else errorheader Fail; exit "$retcode"; fi
+
+   # Git commit for consistent history
+   if [ -n "$gitCommit" ]; then
+       git add canary canary.asc
+       git commit -m "Canary update for $(date +%F)"
+       git push
+       echo
+       git log -n 1
+   fi
+
+   # Exit
+   exit 0
 }
 
 function CanaryVerify() {
@@ -102,9 +115,10 @@ function CanaryVerify() {
 }
 
 # Parse arguments
-while getopts 'c:hk:K:svV' OPTION; do
+while getopts 'c:ghk:K:svV' OPTION; do
     case "$OPTION" in
         c) canary="$OPTARG" ;;
+        g) gitCommit=1 ;;
         h) echo Use this script to seed or verify a warrant canary; Usage 0 ;;
         k) key="$OPTARG" ;;
         K) keyserver="$OPTARG" ;;
