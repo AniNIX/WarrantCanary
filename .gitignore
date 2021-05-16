@@ -1,3 +1,4 @@
 tests/__pycache__/
 pkg/**
 *.pkg.tar.zst
+*.pkg.tar.zst.sig

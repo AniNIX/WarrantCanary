@@ -1,12 +1,12 @@
-As of 2021-03-31, aninix.net has not received any National Security Letters or FISA court orders, and we have not been subject to any gag order(s) by a FISA court, or any other similar court(s) of any government. AniNIX has never placed any backdoors in our hardware or software and has not received any requests to do so. AniNIX has never disclosed any user communications to any third party. No searches or seizures of any kind have ever been performed on AniNIX assets.
+As of 2021-05-16, aninix.net has not received any National Security Letters or FISA court orders, and we have not been subject to any gag order(s) by a FISA court, or any other similar court(s) of any government. AniNIX has never placed any backdoors in our hardware or software and has not received any requests to do so. AniNIX has never disclosed any user communications to any third party. No searches or seizures of any kind have ever been performed on AniNIX assets.
 
 The next two updates should be on or before:
-* 2021-06-29
-* 2021-09-27
+* 2021-11-20
+* 2022-02-01
 
 Recent news:
-* https://www.aljazeera.com/news/2021/3/31/france-announces-3-week-school-closure-domestic-travel-ban</link
-* https://www.npr.org/sections/coronavirus-live-updates/2021/03/31/983041460/india-reports-its-highest-daily-number-of-covid-19-deaths-so-far-this-year</link
+* https://www.aljazeera.com/opinions/2021/5/16/israels-doctrine-humane-bombing-and-benevolent-occupation</link
+* https://www.npr.org/2021/05/16/997259446/israeli-journalist-gives-update-on-conflict-in-country</link
 
 To verify this message, on the terminal import our public key from pool.sks-keyservers.net and verify the canary:
 $ gpg --keyserver pool.sks-keyservers.net --recv-key 1CC1E3F4ED06F296
