@@ -43,7 +43,7 @@ function RecentNews() {
     # param rssFeed: the url to pull
     rssFeed="$1"
     date="$2"
-    curl -s "$rssFeed" | grep "$date" | egrep -m 5 link | tail -n 1 | cut -f 2 -d '>' | cut -f 1 -d '?'
+    curl -s "$rssFeed" | grep "$date" | egrep -m 5 link | tail -n 1 | cut -f 2 -d '>' | cut -f 1 -d '?' | cut -f 1 -d '<'
 }
 
 function CreateCanary() {
@@ -60,7 +60,7 @@ Recent news:
 * $(RecentNews "$npr" "$nprdate")
 
 To verify this message, on the terminal import our public key from $keyserver and verify the canary:
-$ gpg --keyserver $keyserver --recv-key $key
+$ gpg --fetch-keys https://foundation.aninix.net/AniNIX/ShadowArch/raw/branch/main/EtcFiles/aninix.gpg
 $ gpg2 --fingerprint $key
 $(gpg2 --fingerprint $key)
 $ gpg --verify <(curl -s $canary) 2>&1 | grep 'Good signature'
