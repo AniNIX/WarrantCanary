@@ -1,12 +1,12 @@
-As of 2022-04-22, aninix.net has not received any National Security Letters or FISA court orders, and we have not been subject to any gag order(s) by a FISA court, or any other similar court(s) of any government. AniNIX has never placed any backdoors in our hardware or software and has not received any requests to do so. AniNIX has never disclosed any user communications to any third party. No searches or seizures of any kind have ever been performed on AniNIX assets.
+As of 2022-08-06, aninix.net has not received any National Security Letters or FISA court orders, and we have not been subject to any gag order(s) by a FISA court, or any other similar court(s) of any government. AniNIX has never placed any backdoors in our hardware or software and has not received any requests to do so. AniNIX has never disclosed any user communications to any third party. No searches or seizures of any kind have ever been performed on AniNIX assets.
 
 The next two updates should be on or before:
-* 2022-07-21
-* 2022-10-19
+* 2022-11-04
+* 2023-02-01
 
 Recent news:
-* https://www.aljazeera.com/news/2022/4/22/biden-signs-order-to-protect-us-old-growth-forests
-* https://www.npr.org/2022/04/22/1094390348/russians-are-feeling-the-impact-of-sanctions-but-the-worst-is-still-yet-to-come
+* https://www.aljazeera.com/news/2022/8/6/us-readies-1bn-weapons-package-for-ukraine-report
+* 
 
 To verify this message, on the terminal import our public key from pool.sks-keyservers.net and verify the canary:
 $ gpg --fetch-keys https://foundation.aninix.net/AniNIX/ShadowArch/raw/branch/main/EtcFiles/aninix.gpg
