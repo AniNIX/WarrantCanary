@@ -8,7 +8,7 @@ unset canaryText
 # cskey=E9C7C942
 keyserver=pool.sks-keyservers.net
 key=1CC1E3F4ED06F296
-canary=https://foundation.aninix.net/AniNIX/WarrantCanary/raw/branch/main/canary.asc
+canary=https://aninix.net/AniNIX/WarrantCanary/raw/branch/main/canary.asc
 unset gitCommit
 alJazeera='https://www.aljazeera.com/xml/rss/all.xml'
 alJazeeraDate="$(date +%Y/%m/%d | sed -s 's#/0#/#g')"
@@ -49,7 +49,7 @@ function RecentNews() {
 function CreateCanary() {
     rm ./canary.asc
     cat > ./canary << EOM
-As of $(date +%F), aninix.net has not received any National Security Letters or FISA court orders, and we have not been subject to any gag order(s) by a FISA court, or any other similar court(s) of any government. AniNIX has never placed any backdoors in our hardware or software and has not received any requests to do so. AniNIX has never disclosed any user communications to any third party. No searches or seizures of any kind have ever been performed on AniNIX assets.
+As of $(date +%F), the AniNIX has not received any National Security Letters or FISA court orders, and we have not been subject to any gag order(s) by a FISA court, or any other similar court(s) of any government. AniNIX has never placed any backdoors in our hardware or software and has not received any requests to do so. AniNIX has never disclosed any user communications to any third party. No searches or seizures of any kind have ever been performed on AniNIX assets.
 
 The next two updates should be on or before:
 * `date -d @$(( $time + 7776000 )) +%F`
@@ -60,7 +60,7 @@ Recent news:
 * $(RecentNews "$npr" "$nprdate")
 
 To verify this message, on the terminal import our public key from $keyserver and verify the canary:
-$ gpg --fetch-keys https://foundation.aninix.net/AniNIX/ShadowArch/raw/branch/main/EtcFiles/aninix.gpg
+$ gpg --fetch-keys https://aninix.net/AniNIX/ShadowArch/raw/branch/main/EtcFiles/aninix.gpg
 $ gpg2 --fingerprint $key
 $(gpg2 --fingerprint $key)
 $ gpg --verify <(curl -s $canary) 2>&1 | grep 'Good signature'
