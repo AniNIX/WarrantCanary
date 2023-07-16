@@ -1,12 +1,12 @@
-As of 2023-05-16, the AniNIX has not received any National Security Letters or FISA court orders, and we have not been subject to any gag order(s) by a FISA court, or any other similar court(s) of any government. AniNIX has never placed any backdoors in our hardware or software and has not received any requests to do so. AniNIX has never disclosed any user communications to any third party. No searches or seizures of any kind have ever been performed on AniNIX assets.
+As of 2023-07-15, the AniNIX has not received any National Security Letters or FISA court orders, and we have not been subject to any gag order(s) by a FISA court, or any other similar court(s) of any government. AniNIX has never placed any backdoors in our hardware or software and has not received any requests to do so. AniNIX has never disclosed any user communications to any third party. No searches or seizures of any kind have ever been performed on AniNIX assets.
 
 The next two updates should be on or before:
-* 2023-08-14
-* 2023-11-12
+* 2023-10-13
+* 2024-01-11
 
 Recent news:
-* https://www.aljazeera.com/news/2023/5/16/what-to-expect-as-the-us-continues-with-debt-ceiling-negotiations
-* https://www.npr.org/2023/05/16/1176371637/turkey-election-erdogan-us-nato
+* https://www.aljazeera.com/news/2023/7/15/sweden-protester-abandons-plan-to-burn-torah-and-bible
+* https://www.npr.org/2023/07/15/1187939333/mexico-texas-floating-barriers-rio-grande
 
 To verify this message, on the terminal import our public key from pool.sks-keyservers.net and verify the canary:
 $ gpg --fetch-keys https://aninix.net/AniNIX/ShadowArch/raw/branch/main/EtcFiles/aninix.gpg
