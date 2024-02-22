@@ -43,7 +43,7 @@ function RecentNews() {
     # param rssFeed: the url to pull
     rssFeed="$1"
     date="$2"
-    curl -s "$rssFeed" | grep "$date" | grep -m 5 link | tail -n 1 | cut -f 2 -d '>' | cut -f 1 -d '?' | cut -f 1 -d '<'
+    curl -s "$rssFeed" | grep "$date" |   tr '>' '\n' | grep /link | tail -n 1
 }
 
 function CreateCanary() {
