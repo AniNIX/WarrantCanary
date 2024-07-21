@@ -1,12 +1,12 @@
-As of 2024-05-21, the AniNIX has not received any National Security Letters or FISA court orders, and we have not been subject to any gag order(s) by a FISA court, or any other similar court(s) of any government. AniNIX has never placed any backdoors in our hardware or software and has not received any requests to do so. AniNIX has never disclosed any user communications to any third party. No searches or seizures of any kind have ever been performed on AniNIX assets.
+As of 2024-07-20, the AniNIX has not received any National Security Letters or FISA court orders, and we have not been subject to any gag order(s) by a FISA court, or any other similar court(s) of any government. AniNIX has never placed any backdoors in our hardware or software and has not received any requests to do so. AniNIX has never disclosed any user communications to any third party. No searches or seizures of any kind have ever been performed on AniNIX assets.
 
 The next two updates should be on or before:
-* 2024-08-19
-* 2024-11-17
+* 2024-10-18
+* 2025-01-16
 
 Recent news:
-* https://www.aljazeera.com/opinions/2024/5/21/a-un-resolution-can-help-us-survivors-fight-srebrenica-genocide-denial?traffic_source=rss</link
-* https://www.npr.org/2024/05/21/1252641146/zelenskyys-popularity-in-ukraine-has-fallen-will-he-hold-elections</link
+* https://www.aljazeera.com/news/2024/7/20/did-covids-first-wave-kill-eight-times-more-indians-than-announced?traffic_source=rss</link
+* https://www.npr.org/2024/07/20/nx-s1-5045576/a-communist-party-meeting-in-china-aimed-to-chart-a-new-course-for-the-country</link
 
 To verify this message, on the terminal import our public key from pool.sks-keyservers.net and verify the canary:
 $ gpg --fetch-keys https://aninix.net/AniNIX/ShadowArch/raw/branch/main/EtcFiles/aninix.gpg
