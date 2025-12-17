@@ -110,7 +110,7 @@ function CanaryVerify() {
     retcode=$?
     echo
     header Human-readable text:
-    echo "$canaryText" | grep -B 99 'To verify this' | grep -v 'To verify this'
+    echo "$canaryText" | grep -B 99 'To verify this' | grep -vE 'To verify this|BEGIN PGP SIGNED MESSAGE|^Hash: SHA512$'
     exit $retcode
 }
 
