@@ -1,12 +1,12 @@
-As of 2025-09-18, the AniNIX has not received any National Security Letters or FISA court orders, and we have not been subject to any gag order(s) by a FISA court, or any other similar court(s) of any government. AniNIX has never placed any backdoors in our hardware or software and has not received any requests to do so. AniNIX has never disclosed any user communications to any third party. No searches or seizures of any kind have ever been performed on AniNIX assets.
+As of 2025-12-17, the AniNIX has not received any National Security Letters or FISA court orders, and we have not been subject to any gag order(s) by a FISA court, or any other similar court(s) of any government. AniNIX has never placed any backdoors in our hardware or software and has not received any requests to do so. AniNIX has never disclosed any user communications to any third party. No searches or seizures of any kind have ever been performed on AniNIX assets.
 
 The next two updates should be on or before:
-* 2025-12-17
 * 2026-03-17
+* 2026-06-15
 
 Recent news:
-* https://www.aljazeera.com/video/newsfeed/2025/9/18/clashes-at-disputed-border-between-thai-police-and-cambodian-protesters?traffic_source=rss</link
-* https://www.npr.org/2025/09/18/nx-s1-5544329/how-the-u-k-government-wields-the-royal-familys-soft-power-for-diplomacy</link
+* https://www.aljazeera.com/news/2025/12/17/putin-slams-wests-war-hysteria-as-eu-mulls-russian-assets-for-ukraine?traffic_source=rss</link
+* https://www.npr.org/2025/12/17/nx-s1-5637406/new-kremlin-dictionary-redefines-common-words-and-excludes-others-altogether</link
 
 To verify this message, on the terminal import our public key from pool.sks-keyservers.net and verify the canary:
 $ gpg --fetch-keys https://aninix.net/AniNIX/ShadowArch/raw/branch/main/EtcFiles/aninix.gpg
